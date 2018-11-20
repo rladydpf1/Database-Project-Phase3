@@ -16,8 +16,7 @@
 	패스워드: <input type = "password" name = "passwd"><br>
 	<input type = "submit" value = "로그인">
 </form>
-<form action = "joinMembership.jsp" method="post">
-	<input type = "submit" value = "회원가입">
+<input type = "button" value = "회원가입" onclick = "location.href = 'joinMembership.jsp'">
 </form>
 </body>
 </html>
