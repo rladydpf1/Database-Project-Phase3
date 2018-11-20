@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page language="java" import = "java.text.*, java.sql.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>메인 페이지</title>
+</head>
+<body>
+<%
+	// 세션값 가져오기
+	String id = (String)session.getAttribute("id");
+	
+	// 세션값이 없으면 (null 이면) sessionLogin.jsp로 이동
+	if(id==null)
+		response.sendRedirect("loginSession.jsp");
+%>
+<h1>팀5 쇼핑몰 메인 페이지</h1>
+<hr>
+<%=id %>님이 로그인하셨습니다.<br>
+<input type = "button" value = "회원정보 수정" onclick = "location.href = 'changeInfo.jsp'">
+<input type = "button" value = "로그아웃" onclick = "location.href = 'logout.jsp'">
+<input type = "button" value = "과거 구매내역 확인" onclick = "location.href = 'previousPurchase.jsp'">
+<input type = "button" value = "장바구니 확인" onclick = "location.href = 'shoppingBag.jsp'">
+<input type = "button" value = "상품 검색" onclick = "location.href = 'searchItem.jsp'">
+</body>
+</html>
