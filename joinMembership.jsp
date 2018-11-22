@@ -8,41 +8,115 @@
 <title>join membership</title>
 </head>
 <body>
-<h1>íšŒì›ê°€ìž… íŽ˜ì´ì§€ ìž…ë‹ˆë‹¤!</h1>
+<h1>È¸¿ø°¡ÀÔ ÆäÀÌÁö ÀÔ´Ï´Ù!</h1>
 <hr>
 <form action = "joinSession.jsp" method="post">
-	<h3> ì•„ëž˜ëŠ” í•„ìˆ˜ ìž…ë ¥ì‚¬í•­ ìž…ë‹ˆë‹¤.</h3> <br>
-	ì•„ì´ë””(5~10ìž): <input type = "text" name = "id"><br>
-	íŒ¨ìŠ¤ì›Œë“œ(5~10ìž): <input type = "password" name = "passwd"><br>
-	ì£¼ì†Œ: <select name = "big" >
-			<option value="1">ì„œìš¸</option>
-			<option value="2">ê²½ê¸°</option>
-			<option value="3">ê°•ì›</option>
-			<option value="4">ì¶©ë‚¨</option>
-			<option value="5">ì¶©ë¶</option>
-			<option value="6">ê²½ë¶</option>
-			<option value="7">ê²½ë‚¨</option>
-			<option value="8">ì „ë¶</option>
-			<option value="9">ì „ë‚¨</option>
-			<option value="10">ì œì£¼</option>
-			<option value="11">ì¸ì²œ</option>
-			<option value="12">ëŒ€ì „</option>
-			<option value="13">ê´‘ì£¼</option>
-			<option value="14">ëŒ€êµ¬</option>
-			<option value="15">ìš¸ì‚°</option>
-			<option value="16">ë¶€ì‚°</option>
-			</select> 
+	<h3> ¾Æ·¡´Â ÇÊ¼ö ÀÔ·Â»çÇ× ÀÔ´Ï´Ù.</h3> <br>
+	¾ÆÀÌµð(5~10ÀÚ): <input type = "text" name = "id"><br>
+	ÆÐ½º¿öµå(5~10ÀÚ): <input type = "password" name = "passwd"><br>
+	ÁÖ¼Ò: <select name = "big" onChange = "bigChange(this.value,small)">
+			<option selected>-¼±ÅÃ-</option>
+			<option value="1">¼­¿ï</option>
+			<option value="2">ºÎ»ê</option>
+			<option value="3">´ë±¸</option>
+			<option value="4">ÀÎÃµ</option>
+			<option value="5">±¤ÁÖ</option>
+			<option value="6">´ëÀü</option>
+			<option value="7">¿ï»ê</option>
+			<option value="8">°­¿ø</option>
+			<option value="9">°æ±â</option>
+			<option value="10">°æ³²</option>
+			<option value="11">°æºÏ</option>
+			<option value="12">Àü³²</option>
+			<option value="13">ÀüºÏ</option>
+			<option value="14">Á¦ÁÖ</option>
+			<option value="15">Ãæ³²</option>
+			<option value="16">ÃæºÏ</option>
+			</select>
+		<select name = "small">
+			<option selected>-¼±ÅÃ-</option>
+			</select>
 			<br>
-	íœ´ëŒ€ì „í™”(- í¬í•¨í•´ì„œ ìž…ë ¥): <input type = "text" name = "phone"><br>
-	<h3> ì•„ëž˜ëŠ” ì„ íƒ ìž…ë ¥ì‚¬í•­ ìž…ë‹ˆë‹¤.</h3> <br>
-	ì„±ë³„: <select name = "sex" >
-			<option value="M">ë‚¨ìž</option>
-			<option value="F">ì—¬ìž</option>
+	ÈÞ´ëÀüÈ­(- Æ÷ÇÔÇØ¼­ ÀÔ·Â): <input type = "text" name = "phone"><br>
+	<h3> ¾Æ·¡´Â ¼±ÅÃ ÀÔ·Â»çÇ× ÀÔ´Ï´Ù.</h3> <br>
+	¼ºº°: <select name = "sex" >
+			<option value="M">³²ÀÚ</option>
+			<option value="F">¿©ÀÚ</option>
 			</select> <br>
-	ë‚˜ì´: <input type = "text" name = "age"> <br>
-	ì§ì—…: <input type = "text" name = "job"> <br>
-	<input type = "submit" value = "íšŒì›ì •ë³´ ë“±ë¡">
-</form>
+	³ªÀÌ: <input type = "text" name = "age"> <br>
+	Á÷¾÷: <input type = "text" name = "job"> <br>
+	<input type = "submit" value = "È¸¿øÁ¤º¸ µî·Ï">
+<script type = "text/javascript">
+<!--
+var big_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+var big_name = new Array('¼­¿ï','ºÎ»ê','´ë±¸','ÀÎÃµ','±¤ÁÖ','´ëÀü','¿ï»ê','°­¿ø','°æ±â','°æ³²','°æºÏ','Àü³²','ÀüºÏ','Á¦ÁÖ','Ãæ³²','ÃæºÏ');
 
-</body>
+var small_num = new Array();
+var small_name = new Array();
+
+small_num[1] = new Array(17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41);
+small_name[1] = new Array('°­³²±¸','°­µ¿±¸','°­ºÏ±¸','°­¼­±¸','°ü¾Ç±¸','±¤Áø±¸','±¸·Î±¸','±ÝÃµ±¸','³ë¿ø±¸','µµºÀ±¸','µ¿´ë¹®±¸','µ¿ÀÛ±¸','¸¶Æ÷±¸','¼­´ë¹®±¸','¼­ÃÊ±¸','¼ºµ¿±¸','¼ººÏ±¸','¼ÛÆÄ±¸','¾çÃµ±¸','¿µµîÆ÷±¸','¿ë»ê±¸','ÀºÆò±¸','Á¾·Î±¸','Áß±¸','Áß¶û±¸');
+
+small_num[2] = new Array(42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57);
+small_name[2] = new Array('°­¼­±¸','±ÝÁ¤±¸','³²±¸','µ¿±¸','µ¿·¡±¸','ºÎ»êÁø±¸','ºÏ±¸','»ç»ó±¸','»çÇÏ±¸','¼­±¸','¼ö¿µ±¸','¿¬Á¦±¸','¿µµµ±¸','Áß±¸','ÇØ¿î´ë±¸','±âÀå±º');
+
+small_num[3] = new Array(58,59,60,61,62,63,64,65);
+small_name[3] = new Array('³²±¸','´Þ¼­±¸','µ¿±¸','ºÏ±¸','¼­±¸','¼ö¼º±¸','Áß±¸','´Þ¼º±º');
+
+small_num[4] = new Array(66,67,68,69,70,71,72,73,74,75);
+small_name[4] = new Array('°è¾ç±¸','³²±¸','³²µ¿±¸','µ¿±¸','ºÎÆò±¸','¼­±¸','¿¬¼ö±¸','Áß±¸','°­È­±º','¿ËÁø±º');
+
+small_num[5] = new Array(76,77,78,79,80);
+small_name[5] = new Array('±¤»ê±¸','³²±¸','µ¿±¸','ºÏ±¸','¼­±¸');
+
+small_num[6] = new Array(81,82,83,84,85);
+small_name[6] = new Array('´ë´ö±¸','µ¿±¸','¼­±¸','À¯¼º±¸','Áß±¸');
+
+small_num[7] = new Array(86,87,88,89,90);
+small_name[7] = new Array('³²±¸','µ¿±¸','ºÏ±¸','Áß±¸','¿ïÁÖ±º');
+
+small_num[8] = new Array(91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108);
+small_name[8] = new Array('°­¸ª½Ã','µ¿ÇØ½Ã','»ïÃ´½Ã','¼ÓÃÊ½Ã','¿øÁÖ½Ã','ÃáÃµ½Ã','ÅÂ¹é½Ã','°í¼º±º','¾ç±¸±º','¾ç¾ç±º','¿µ¿ù±º','ÀÎÁ¦±º','Á¤¼±±º','Ã¶¿ø±º','ÆòÃ¢±º','È«Ãµ±º','È­Ãµ±º','È¾¼º±º');
+
+small_num[9] = new Array(109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148);
+small_name[9] = new Array('°í¾ç½Ã ´ö¾ç±¸','°í¾ç½Ã ÀÏ»ê±¸','°úÃµ½Ã','±¤¸í½Ã','±¤ÁÖ½Ã','±¸¸®½Ã','±ºÆ÷½Ã','±èÆ÷½Ã','³²¾çÁÖ½Ã','µ¿µÎÃµ½Ã','ºÎÃµ½Ã ¼Ò»ç±¸','ºÎÃµ½Ã ¿ÀÁ¤±¸','ºÎÃµ½Ã ¿ø¹Ì±¸','¼º³²½Ã ºÐ´ç±¸','¼º³²½Ã ¼öÁ¤±¸','¼º³²½Ã Áß¿ø±¸','¼ö¿ø½Ã ±Ç¼±±¸','¼ö¿ø½Ã Àå¾È±¸','¼ö¿ø½Ã ÆÈ´Þ±¸','½ÃÈï½Ã','¾È»ê½Ã ´Ü¿ø±¸','¾È»ê½Ã »ó·Ï±¸','¾È¼º½Ã','¾È¾ç½Ã µ¿¾È±¸','¾È¾ç½Ã ¸¸¾È±¸','¿À»ê½Ã','¿ëÀÎ½Ã','ÀÇ¿Õ½Ã','ÀÇÁ¤ºÎ½Ã','ÀÌÃµ½Ã','ÆÄÁÖ½Ã','ÆòÅÃ½Ã','ÇÏ³²½Ã','È­¼º½Ã','°¡Æò±º','¾çÁÖ±º','¾çÆò±º','¿©ÁÖ±º','¿¬Ãµ±º','Æ÷Ãµ±º');
+
+small_num[10] = new Array(149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168);
+small_name[10] = new Array('°ÅÁ¦½Ã','±èÇØ½Ã','¸¶»ê½Ã','¹Ð¾ç½Ã','»çÃµ½Ã','¾ç»ê½Ã','ÁøÁÖ½Ã','ÁøÇØ½Ã','Ã¢¿ø½Ã','Åë¿µ½Ã','°ÅÃ¢±º','°í¼º±º','³²ÇØ±º','»êÃ»±º','ÀÇ·É±º','Ã¢³ç±º','ÇÏµ¿±º','ÇÔ¾È±º','ÇÔ¾ç±º','ÇÕÃµ±º');
+
+small_num[11] = new Array(169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192);
+small_name[11] = new Array('°æ»ê½Ã','°æÁÖ½Ã','±¸¹Ì½Ã','±èÃµ½Ã','¹®°æ½Ã','»óÁÖ½Ã','¾Èµ¿½Ã','¿µÁÖ½Ã','¿µÃµ½Ã','Æ÷Ç×½Ã ³²±¸','Æ÷Ç×½Ã ºÏ±¸','°í·É±º','±ºÀ§±º','ºÀÈ­±º','¼ºÁÖ±º','¿µ´ö±º','¿µ¾ç±º','¿¹Ãµ±º','¿ï¸ª±º','¿ïÁø±º','ÀÇ¼º±º','Ã»µµ±º','Ã»¼Û±º','Ä¥°î±º');
+
+small_num[12] = new Array(193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214);
+small_name[12] = new Array('±¤¾ç½Ã','³ªÁÖ½Ã','¸ñÆ÷½Ã','¼øÃµ½Ã','¿©¼ö½Ã','°­Áø±º','°íÈï±º','°î¼º±º','±¸·Ê±º','´ã¾ç±º','¹«¾È±º','º¸¼º±º','½Å¾È±º','¿µ±¤±º','¿µ¾Ï±º','¿Ïµµ±º','Àå¼º±º','ÀåÈï±º','Áøµµ±º','ÇÔÆò±º','ÇØ³²±º','È­¼ø±º');
+
+small_num[13] = new Array(215,216,217,218,219,220,221,222,223,224,225,226,227,228,229);
+small_name[13] = new Array('±º»ê½Ã','±èÁ¦½Ã','³²¿ø½Ã','ÀÍ»ê½Ã','ÀüÁÖ½Ã ´öÁø±¸','ÀüÁÖ½Ã ¿Ï»ê±¸','Á¤À¾½Ã','°íÃ¢±º','¹«ÁÖ±º','ºÎ¾È±º','¼øÃ¢±º','¿ÏÁÖ±º','ÀÓ½Ç±º','Àå¼ö±º','Áø¾È±º');
+
+small_num[14] = new Array(230,231,232,233);
+small_name[14] = new Array('¼­±ÍÆ÷½Ã','Á¦ÁÖ½Ã','³²Á¦ÁÖ±º','ºÏÁ¦ÁÖ±º');
+
+small_num[15] = new Array(234,235,236,237,238,239,240,241,242,243,244,245,246,247,248);
+small_name[15] = new Array('°øÁÖ½Ã','³í»ê½Ã','º¸·É½Ã','¼­»ê½Ã','¾Æ»ê½Ã','Ãµ¾È½Ã','±Ý»ê±º','´çÁø±º','ºÎ¿©±º','¼­Ãµ±º','¿¬±â±º','¿¹»ê±º','Ã»¾ç±º','ÅÂ¾È±º','È«¼º±º');
+
+small_num[16] = new Array(249,250,251,252,253,254,255,256,257,258,259,260);
+small_name[16] = new Array('Á¦Ãµ½Ã','Ã»ÁÖ½Ã »ó´ç±¸','Ã»ÁÖ½Ã Èï´ö±¸','ÃæÁÖ½Ã','±«»ê±º','´Ü¾ç±º','º¸Àº±º','¿µµ¿±º','¿ÁÃµ±º','À½¼º±º','ÁøÃµ±º','Ã»¿ø±º');
+
+function bigChange(key,sel){
+if(key == '') return;
+var name = small_name[key];
+var val = small_num[key];
+
+for(i=sel.length-1; i>=0; i--)
+ sel.options[i] = null;
+sel.options[0] = new Option('-¼±ÅÃ-','', '', 'true');
+for(i=0; i<name.length; i++){
+ sel.options[i+1] = new Option(name[i],val[i]);
+}
+}
+
+-->
+</script>
+</form>
+ </body>
 </html>
