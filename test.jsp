@@ -11,7 +11,7 @@
 <%
 String user = "root";
 String password = "rladydpf2";
-String url = "jdbc:mysql://172.20.10.3:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8& verifyServerCertificate=false& useSSL=false& serverTimezone=UTC &sessionVariables=storage_engine%3DInnoDB &interactiveClient=true";
+String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
 Statement stmt = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
