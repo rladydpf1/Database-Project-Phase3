@@ -37,7 +37,7 @@ String sex = request.getParameter("sex");
 String phone = request.getParameter("phone");
 String pwd = request.getParameter("passwd");
 
-if (5 > pwd.length() || pwd.length() > 10) {
+if (pwd == null || 5 > pwd.length() || pwd.length() > 10) {
 	System.out.println(pwd.length());
 	%>
 	<script>
