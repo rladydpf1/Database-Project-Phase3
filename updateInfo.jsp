@@ -37,8 +37,7 @@ String sex = request.getParameter("sex");
 String phone = request.getParameter("phone");
 String pwd = request.getParameter("passwd");
 
-if (pwd == null || 5 > pwd.length() || pwd.length() > 10) {
-	System.out.println(pwd.length());
+if (pwd == "" || 5 > pwd.length() || pwd.length() > 10) {
 	%>
 	<script>
 	alert('비밀번호 형식이 틀렸습니다.')
@@ -46,7 +45,7 @@ if (pwd == null || 5 > pwd.length() || pwd.length() > 10) {
 	</script>
 	<%
 }
-if (phone == null) {
+if (phone == "") {
 	%>
 	<script>
 	alert('휴대전화 번호를 쓰지 않았습니다.')
@@ -62,7 +61,7 @@ if (phone.charAt(3) != '-' || phone.charAt(8) != '-' || phone.length() != 13) {
 	</script>
 	<%
 }
-if (name == null) {
+if (name == "") {
 	%>
 	<script>
 	alert('이름을 쓰지 않았습니다.')
@@ -71,11 +70,17 @@ if (name == null) {
 	<%
 }
 
-sql = String.format("UPDATE CUSTOMER SET Age = %s, Cname = '%s' WHERE Cnumber = %d", age, name, number);
+if (age == "") sql = String.format("UPDATE CUSTOMER SET Age = null WHERE Cnumber = %d", number);
+else sql = String.format("UPDATE CUSTOMER SET Age = %s WHERE Cnumber = %d", age, number);
+System.out.println(sql);
 pstmt = conn.prepareStatement(sql);
 pstmt.executeUpdate();
 
-if (job == null) sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", number);
+sql = String.format("UPDATE CUSTOMER SET Cname = '%s' WHERE Cnumber = %d", name, number);
+pstmt = conn.prepareStatement(sql);
+pstmt.executeUpdate();
+
+if (job == "") sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", number);
 else sql = String.format("UPDATE CUSTOMER SET Job = '%s' WHERE Cnumber = %d", job, number);
 pstmt = conn.prepareStatement(sql);
 pstmt.executeUpdate();
@@ -84,7 +89,7 @@ sql = String.format("UPDATE CUSTOMER SET Pwd = '%s' WHERE Cnumber = %d", pwd, nu
 pstmt = conn.prepareStatement(sql);
 pstmt.executeUpdate();
 
-if (sex == null) sql = String.format("UPDATE CUSTOMER SET Sex = null WHERE Cnumber = %d", number);
+if (sex == "") sql = String.format("UPDATE CUSTOMER SET Sex = null WHERE Cnumber = %d", number);
 else sql = String.format("UPDATE CUSTOMER SET Sex = '%s' WHERE Cnumber = %d", sex, number);
 pstmt = conn.prepareStatement(sql);
 pstmt.executeUpdate();
@@ -93,7 +98,7 @@ sql = String.format("UPDATE CUSTOMER SET Phone = '%s' WHERE Cnumber = %d", phone
 pstmt = conn.prepareStatement(sql);
 pstmt.executeUpdate();
 
-//if (job == null) sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", number);
+//if (job == "") sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", number);
 //sql = String.format("UPDATE CUSTOMER SET Address = '%s' WHERE Cnumber = %d", address, number); // 주소는 나중으로 미루자..
 //pstmt = conn.prepareStatement(sql);
 //pstmt.executeUpdate();
