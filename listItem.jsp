@@ -26,9 +26,21 @@
 	catch (ClassNotFoundException e) {
 		e.printStackTrace();
 	}
+	String temp = null;
+	int small_num = 0;
+	try {
+		temp = request.getParameter("small");
+		small_num = Integer.parseInt(temp);
+	}
+	catch (Exception e){
+		%>
+		<script>
+		alert('카테고리를 선택해주세요.')
+		location.href = 'mainPage.jsp'
+		</script>
+		<%
+	}
 	
-	String temp = request.getParameter("small");
-	int small_num = Integer.parseInt(temp);
 	
 	String[] cate = new String[10];
 	cate[1] = "사과/배"; cate[2] = "감귤/한라봉"; cate[3] = "감/곶감";
