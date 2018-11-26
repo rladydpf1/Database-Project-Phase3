@@ -36,7 +36,7 @@
 	catch (Exception e){
 		%>
 		<script>
-		alert('카테고리를 선택해주세요.')
+		alert('아이템을 선택해주세요.')
 		location.href = 'mainPage.jsp'
 		</script>
 		<%
