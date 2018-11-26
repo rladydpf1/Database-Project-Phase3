@@ -8,6 +8,7 @@
 <title>shopping bag</title>
 </head>
 <body>
+<h2>장바구니 페이지입니다.</h2>
 <%
 int number = (int)session.getAttribute("num");
 String user = "root";
@@ -27,7 +28,7 @@ try {
 catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
-sql = String.format("SELECT Iname, Price, Bquantity, Inum FROM CUSTOMER, ITEM, SHOPPINGBAG WHERE Cnumber = %s AND Cnumber = Cnum AND Inumber = Inum", number);
+sql = String.format("SELECT Iname, Price, Bquantity, Inum FROM CUSTOMER, ITEM, SHOPPINGBAG WHERE Cnumber = %d AND Cnumber = Cnum AND Inumber = Inum", number);
 pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();
 
@@ -48,11 +49,17 @@ while (rs.next()) {
 	price = rs.getInt(2);
 	quantity = rs.getInt(3);
 	num = rs.getInt(4);
+	price = price * quantity;
 %>
 			<tr>
 		        <td id="title"><%=name%></td>
 		        <td id="title"><%=price%>원</td>
 		        <td id="title"><%=quantity%></td>
+		        <td> <form action = "showItem.jsp" method="post">
+					<input type = "hidden" name = "num" value =<%=num%>>
+					<input type = "submit" value = "상세">
+					</form> 
+				</td>
 		        <td> <form action = "order.jsp" method="post">
 					<input type = "hidden" name = "num" value =<%=num%>>
 					<input type = "hidden" name = "price" value =<%=price%>>
