@@ -10,7 +10,6 @@
 <body>
 <%
 int number = (int)session.getAttribute("num");
-System.out.println(number);
 String user = "root";
 String password = "rladydpf2";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
@@ -28,8 +27,8 @@ try {
 catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
-
-String age = request.getParameter("age");
+String temp = request.getParameter("age");
+int age = Integer.parseInt(temp);
 String name = request.getParameter("name");
 //String address = request.getParameter("big"); 이건 나중에 처리합시다
 String job = request.getParameter("job");
@@ -66,8 +65,17 @@ if (name.isEmpty()) {
 	<%
 	key = false;
 }
+if (age < 1) {
+	%>
+	<script>
+	alert('나이가 올바르지 않습니다.')
+	location.href = 'changeInfo.jsp'
+	</script>
+	<%
+	key = false;
+}
 if (key) {
-	if (age.isEmpty()) sql = String.format("UPDATE CUSTOMER SET Age = null WHERE Cnumber = %d", number);
+	if (age < 1) sql = String.format("UPDATE CUSTOMER SET Age = null WHERE Cnumber = %d", number);
 	else sql = String.format("UPDATE CUSTOMER SET Age = %s WHERE Cnumber = %d", age, number);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
@@ -106,4 +114,3 @@ if (key) {
 </script>
 </body>
 </html>
-
