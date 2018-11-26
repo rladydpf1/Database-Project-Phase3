@@ -33,8 +33,14 @@ pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();
 while (rs.next()) number = rs.getInt(1) + 1;
 
+int age = -1;
+boolean key2 = true;
+String temp = request.getParameter("age");
 String id = request.getParameter("id");
-String age = request.getParameter("age");
+if (!temp.isEmpty()){
+	age = Integer.parseInt(temp);
+	key2 = false;
+}
 String name = request.getParameter("name");
 //String address = request.getParameter("big"); 이건 나중에 처리합시다
 String job = request.getParameter("job");
@@ -95,12 +101,21 @@ if (name.isEmpty()) {
 	<%
 	key = false;
 }
+if (age < 1 && !key2) {
+	%>
+	<script>
+	alert('나이가 올바르지 않습니다.')
+	location.href = 'joinMembership.jsp'
+	</script>
+	<%
+	key = false;
+}
 if (key) {
 	sql = String.format("INSERT INTO CUSTOMER VALUES('%s', 'no address', null, null, %d, null, '%s', 'E', '%s', '%s')", name, number, phone, id, pwd);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 
-	if (!age.isEmpty()) {
+	if (age > 0) {
 		sql = String.format("UPDATE CUSTOMER SET Age = '%s' WHERE Cnumber = %d", age, number);
 		pstmt = conn.prepareStatement(sql);
 		pstmt.executeUpdate();
