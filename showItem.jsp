@@ -28,9 +28,19 @@
 		e.printStackTrace();
 	}
 	String temp = null;
-	temp = request.getParameter("num");
-	int num = Integer.parseInt(temp);
-	
+	int num = 0;
+	try {
+		temp = request.getParameter("num");
+		num = Integer.parseInt(temp);
+	}
+	catch (Exception e){
+		%>
+		<script>
+		alert('카테고리를 선택해주세요.')
+		location.href = 'mainPage.jsp'
+		</script>
+		<%
+	}
 	sql = String.format("SELECT Date_of_product, Price, Iname, Expiration_date, Origin, Importer, Producer, Smallc " +
 						"FROM ITEM, PRODUCERLOCATION WHERE Inumber = %d AND Inumber = Inum", num);
 	pstmt = conn.prepareStatement(sql);
