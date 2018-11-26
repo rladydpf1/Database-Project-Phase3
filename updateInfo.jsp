@@ -27,8 +27,13 @@ try {
 catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
+int age = -1;
+boolean key2 = true;
 String temp = request.getParameter("age");
-int age = Integer.parseInt(temp);
+if (!temp.isEmpty()) {
+	age = Integer.parseInt(temp);
+	key2 = false;
+}
 String name = request.getParameter("name");
 //String address = request.getParameter("big"); 이건 나중에 처리합시다
 String job = request.getParameter("job");
@@ -65,7 +70,7 @@ if (name.isEmpty()) {
 	<%
 	key = false;
 }
-if (age < 1) {
+if (age < 1 && !key2) {
 	%>
 	<script>
 	alert('나이가 올바르지 않습니다.')
@@ -114,3 +119,4 @@ if (key) {
 </script>
 </body>
 </html>
+
