@@ -1,0 +1,18 @@
+로그아웃 하고 뒤로가기 누르면 다시 원래 있던 메인 페이지가 뜨는데, 거기서 다른 기능을 선택하면 터짐
+그래서 모든 페이지에 session 체크를 해서 로그인 되어 있는 상태인지 아닌지 체크를 해야 될듯
+그래서 일단 바꿔놓음 
+<%
+int customer = -1;
+try {
+	customer = (int)session.getAttribute("customer");
+}
+catch (Exception e) {
+	%>
+	<script>
+	alert('로그인 해주세요.')
+	location.href = 'login.jsp'
+	</script>
+	<%
+}
+이런 느낌으로
+그래서 일단 다시 팀프 할 때 다 바꿀게 너도 중간에 코드 더 짠거 있으면 먼저 그거 주셈
