@@ -29,8 +29,12 @@ if (manager == null) {
 </form>
 <br>
 <input type = "button" value = "재고가 모자란 상품 확인" onclick = "location.href = 'checkList.jsp'">
-<br>
-<input type = "button" value = "매출 확인" onclick = "location.href = 'getSales.jsp'"> <br>
+<br><br>
+<form action = "getSales.jsp" method="get">
+	날짜 입력: <input type = "date" name = "start" value="2018-12-05" min="2016-10-01" max="2018-12-31"> 
+	 ~ <input type = "date" name = "finish" value="2018-12-05" min="2016-10-01" max="2018-12-31">
+	<input type = "submit" value = "매출 확인"> <br>
+</form>
 <input type = "button" value = "로그아웃" onclick = "location.href = 'logout.jsp'">
 </body>
 </html>
