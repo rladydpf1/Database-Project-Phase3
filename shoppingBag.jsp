@@ -10,7 +10,18 @@
 <body>
 <h2>장바구니 페이지입니다.</h2>
 <%
-int number = (int)session.getAttribute("num");
+int customer = -1;
+try {
+	customer = (int)session.getAttribute("customer");
+}
+catch (Exception e) {
+	%>
+	<script>
+	alert('로그인 해주세요.')
+	location.href = 'login.jsp'
+	</script>
+	<%
+}
 String user = "root";
 String password = "rladydpf2";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
@@ -28,7 +39,7 @@ try {
 catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
-sql = String.format("SELECT Iname, Price, Bquantity, Inum FROM CUSTOMER, ITEM, SHOPPINGBAG WHERE Cnumber = %d AND Cnumber = Cnum AND Inumber = Inum", number);
+sql = String.format("SELECT Iname, Price, Bquantity, Inum FROM CUSTOMER, ITEM, SHOPPINGBAG WHERE Cnumber = %d AND Cnumber = Cnum AND Inumber = Inum", customer);
 pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();
 
@@ -37,7 +48,7 @@ rs = pstmt.executeQuery();
 		<tread>
 			<tr>
 				<th>상품 이름</th>
-				<th>가격</th>
+				<th>총 가격</th>
 				<th>수량</th>
 			</tr>
 	    </tread>
@@ -55,7 +66,6 @@ while (rs.next()) {
 		        <td id="title"><%=name%></td>
 		        <td id="title"><%=price%>원</td>
 		        <td id="title"><%=quantity%></td>
-		     
 		        <td> <form action = "order.jsp" method="post">
 					<input type = "hidden" name = "num" value =<%=num%>>
 					<input type = "hidden" name = "price" value =<%=price%>>
