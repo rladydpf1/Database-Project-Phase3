@@ -9,7 +9,18 @@
 </head>
 <body>
 <%
-int number = (int)session.getAttribute("num");
+int customer = -1;
+try {
+	customer = (int)session.getAttribute("customer");
+}
+catch (Exception e) {
+	%>
+	<script>
+	alert('로그인 해주세요.')
+	location.href = 'login.jsp'
+	</script>
+	<%
+}
 String user = "root";
 String password = "rladydpf2";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
@@ -80,30 +91,30 @@ if (age < 1 && !key2) {
 	key = false;
 }
 if (key) {
-	if (age < 1) sql = String.format("UPDATE CUSTOMER SET Age = null WHERE Cnumber = %d", number);
-	else sql = String.format("UPDATE CUSTOMER SET Age = %s WHERE Cnumber = %d", age, number);
+	if (age < 1) sql = String.format("UPDATE CUSTOMER SET Age = null WHERE Cnumber = %d", customer);
+	else sql = String.format("UPDATE CUSTOMER SET Age = %s WHERE Cnumber = %d", age, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 
-	sql = String.format("UPDATE CUSTOMER SET Cname = '%s' WHERE Cnumber = %d", name, number);
+	sql = String.format("UPDATE CUSTOMER SET Cname = '%s' WHERE Cnumber = %d", name, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 
-	if (job.isEmpty()) sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", number);
-	else sql = String.format("UPDATE CUSTOMER SET Job = '%s' WHERE Cnumber = %d", job, number);
+	if (job.isEmpty()) sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", customer);
+	else sql = String.format("UPDATE CUSTOMER SET Job = '%s' WHERE Cnumber = %d", job, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 
-	sql = String.format("UPDATE CUSTOMER SET Pwd = '%s' WHERE Cnumber = %d", pwd, number);
+	sql = String.format("UPDATE CUSTOMER SET Pwd = '%s' WHERE Cnumber = %d", pwd, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 
-	if (sex.isEmpty()) sql = String.format("UPDATE CUSTOMER SET Sex = null WHERE Cnumber = %d", number);
-	else sql = String.format("UPDATE CUSTOMER SET Sex = '%s' WHERE Cnumber = %d", sex, number);
+	if (sex.isEmpty()) sql = String.format("UPDATE CUSTOMER SET Sex = null WHERE Cnumber = %d", customer);
+	else sql = String.format("UPDATE CUSTOMER SET Sex = '%s' WHERE Cnumber = %d", sex, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 
-	sql = String.format("UPDATE CUSTOMER SET Phone = '%s' WHERE Cnumber = %d", phone, number);
+	sql = String.format("UPDATE CUSTOMER SET Phone = '%s' WHERE Cnumber = %d", phone, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 
