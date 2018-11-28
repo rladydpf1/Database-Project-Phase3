@@ -10,7 +10,18 @@
 <body>
 <h2>구매목록 페이지입니다.</h2>
 <%
-int number = (int)session.getAttribute("num");
+int customer = -1;
+try {
+	customer = (int)session.getAttribute("customer");
+}
+catch (Exception e) {
+	%>
+	<script>
+	alert('로그인 해주세요.')
+	location.href = 'login.jsp'
+	</script>
+	<%
+}
 String user = "root";
 String password = "rladydpf2";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
@@ -29,7 +40,7 @@ catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
 sql = String.format("SELECT Oquantity, Address, Odate, Iname, Ino " +
-		"FROM ORDER1, RETAILER, ITEM WHERE Cno = %d AND Ino = Inumber AND Rno = Rnumber", number);
+		"FROM ORDER1, RETAILER, ITEM WHERE Cno = %d AND Ino = Inumber AND Rno = Rnumber", customer);
 pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();
 
