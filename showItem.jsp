@@ -9,7 +9,18 @@
 </head>
 <body>
 <%
-	
+int customer = -1;
+try {
+	customer = (int)session.getAttribute("customer");
+}
+catch (Exception e) {
+	%>
+	<script>
+	alert('로그인 해주세요.')
+	location.href = 'login.jsp'
+	</script>
+	<%
+}
 	String user = "root";
 	String password = "rladydpf2";
 	String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
