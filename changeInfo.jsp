@@ -10,8 +10,19 @@
 <body>
 <h2>회원정보 수정 페이지 입니다.</h2>
 <%
-int number = (int)session.getAttribute("num");
-System.out.println(number);
+int customer = -1;
+try {
+	customer = (int)session.getAttribute("customer");
+}
+catch (Exception e) {
+	%>
+	<script>
+	alert('로그인 해주세요.')
+	location.href = 'login.jsp'
+	</script>
+	<%
+}
+System.out.println(customer);
 String user = "root";
 String password = "rladydpf2";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
@@ -30,7 +41,7 @@ catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
 
-sql = String.format("SELECT * FROM CUSTOMER WHERE Cnumber = %d", number);
+sql = String.format("SELECT * FROM CUSTOMER WHERE Cnumber = %d", customer);
 
 pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();
@@ -130,7 +141,7 @@ while (rs.next()) {
 	        <td id="title"><%=age %></td>
 	    </tr>
 	</table>
-	나이: <input type = "text" name = "age"> <br>
+	나이: <input type = "number" name = "age"> <br>
 	
 	<table>
 		<tr>
