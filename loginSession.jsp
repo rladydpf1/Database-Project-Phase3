@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>check with DB</title>
+<title>login session</title>
 </head>
 <body>
 <h1>로그인 인증</h1>
@@ -32,16 +32,15 @@
 	// 사용자가 로그인 시 입력한 값
 	String id = request.getParameter("id");
 	String passwd = request.getParameter("passwd");
-	
+	System.out.println(id);
 	String managerId = "manager1";
 	String managerPass = "manager2";
 	boolean key = false;
 	String DBid, DBpwd;
 	
-	sql = "SELECT ID, Pwd FROM CUSTOMER";
+	sql = "SELECT ID, Pwd, Cnumber FROM CUSTOMER";
 	pstmt = conn.prepareStatement(sql);
 	rs = pstmt.executeQuery();
-	
 	if (id.equals(managerId)) { // 아이디 있음
 		if(passwd.equals(managerPass)){
 			session.setAttribute("id", id);
@@ -56,14 +55,16 @@
 		} else // 패스워드 틀림
 			out.println("패스워드틀림<br>");
 	} 
+	int number = -1;
 	while (rs.next()) {
 		if (key) break;
 		DBid = rs.getString(1);
 		DBpwd = rs.getString(2);
+		number = rs.getInt(3);
 		if (id.equals(DBid)) {
 			key = true;
 			if (passwd.equals(DBpwd)) {
-				session.setAttribute("id", id);
+				session.setAttribute("customer", number);
 				out.println("로그인 인증됨<br>");
 				response.sendRedirect("mainPage.jsp");
 				%>
