@@ -9,6 +9,18 @@
 </head>
 <body>
 <%
+int customer = -1;
+try {
+	customer = (int)session.getAttribute("customer");
+}
+catch (Exception e) {
+	%>
+	<script>
+	alert('로그인 해주세요.')
+	location.href = 'login.jsp'
+	</script>
+	<%
+}
 	String user = "root";
 	String password = "rladydpf2";
 	String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
@@ -26,25 +38,16 @@
 	catch (ClassNotFoundException e) {
 		e.printStackTrace();
 	}
-	
-	String id = null;
+ 
 	String name = null;
-	int number = 0;
 	
-	id = (String)session.getAttribute("id");
-	sql = String.format("SELECT Cnumber, Cname FROM CUSTOMER WHERE ID = '%s' ", id);
+	sql = String.format("SELECT Cname FROM CUSTOMER WHERE Cnumber = %d ", customer);
 	pstmt = conn.prepareStatement(sql);
 	rs = pstmt.executeQuery();
-	// 세션값 가져오기
 	
-	if (id == null) response.sendRedirect("login.jsp");
-	// 세션값이 없으면 (null 이면) sessionLogin.jsp로 이동
 	while (rs.next()) {
-		number = rs.getInt(1);
-		name = rs.getString(2);
+		name = rs.getString(1);
 	}
-	
-	session.setAttribute("num", number);
 	
 %>
 <h1>팀5 쇼핑몰 메인 페이지</h1>
