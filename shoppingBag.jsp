@@ -66,6 +66,11 @@ while (rs.next()) {
 		        <td id="title"><%=name%></td>
 		        <td id="title"><%=price%>원</td>
 		        <td id="title"><%=quantity%></td>
+		        <td> <form action = "trashShoppingBag.jsp" method="post">
+					<input type = "hidden" name = "item" value =<%=num%>>
+					<input type = "submit" value = "장바구니에서 삭제">
+					</form> 
+				</td>
 		        <td> <form action = "order.jsp" method="post">
 					<input type = "hidden" name = "num" value =<%=num%>>
 					<input type = "hidden" name = "price" value =<%=price%>>
