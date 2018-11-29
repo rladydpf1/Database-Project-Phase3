@@ -38,57 +38,62 @@ try {
 catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
-int item = 0, quantity = 0;
+int item = 0, quantity = -1;
 boolean key = true;
 String temp = null;
 try {
 	temp = request.getParameter("num");
-	item = Integer.parseInt(temp);
+	if (!(temp == null)) item = Integer.parseInt(temp);
 	temp = request.getParameter("quantity");
-	quantity = Integer.parseInt(temp);
+	if (!(temp == null)) quantity = Integer.parseInt(temp);
 }
-catch(Exception e) {
+catch(Exception e) {}
+if (item < 1 || item > 15) {
 	key = false;
 	%>
 	<script>
-	alert('제대로된 수량을 정해주세요.')
-	</script>
-	<form action = "showItem.jsp" method="post">
-		<input type = "hidden" name = "num" value =<%=item%>>
-		<input type = "submit" value = "이전 페이지로 돌아가기">
-	</form> 
+	alert('아이템을 정하지 않았습니다.')
+	location.href = 'mainPage.jsp'
+	</script> 
 	<%
 }
-if (key && quantity <= 0) {
+else if (quantity <= 0) {
+	key = false;
 	%>
+	<form action = "showItem.jsp" method="post">
+		<input type = "hidden" name = "num" value =<%=item%>>
+		<input type = "submit" value = "이전으로 돌아가기">
+	</form>
 	<script>
 	alert('제대로된 수량을 정해주세요.')
-	</script>
-	<form action = "showItem.jsp" method="post">
-		<input type = "hidden" name = "num" value =<%=item%>>
-		<input type = "submit" value = "이전 페이지로 돌아가기">
-	</form> 
+	</script> 
 	<%
 }
-sql = String.format("SELECT Bquantity FROM SHOPPINGBAG WHERE Cnum = %d AND Inum = %d", customer, item);
-pstmt = conn.prepareStatement(sql);
-rs = pstmt.executeQuery();
+%>
+<%
+if (key){
+	sql = String.format("SELECT Bquantity FROM SHOPPINGBAG WHERE Cnum = %d AND Inum = %d", customer, item);
+	pstmt = conn.prepareStatement(sql);
+	rs = pstmt.executeQuery();
 
-int overlap = 0;
-while (rs.next()) {
-	overlap = rs.getInt(1);
-	sql = String.format("DELETE FROM SHOPPINGBAG WHERE Cnum = %d AND Inum = %d", customer, item);
+	int overlap = 0;
+	while (rs.next()) {
+		overlap = rs.getInt(1);
+		sql = String.format("DELETE FROM SHOPPINGBAG WHERE Cnum = %d AND Inum = %d", customer, item);
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+	}
+
+	sql = String.format("INSERT INTO SHOPPINGBAG VALUES (%d, %d, %d)", customer, quantity + overlap, item);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
+	%>
+		<script>
+			alert('장바구니에 담았습니다.')
+			location.href = 'mainPage.jsp'
+		</script>
+	<% 
 }
-
-sql = String.format("INSERT INTO SHOPPINGBAG VALUES (%d, %d, %d)", customer, quantity + overlap, item);
-pstmt = conn.prepareStatement(sql);
-pstmt.executeUpdate();
 %>
-	<script>
-		alert('장바구니에 담았습니다.')
-		location.href = 'mainPage.jsp'
-	</script>
 </body>
 </html>
