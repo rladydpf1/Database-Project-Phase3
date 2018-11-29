@@ -48,7 +48,7 @@ try {
 	if (!(temp == null)) quantity = Integer.parseInt(temp);
 }
 catch(Exception e) {}
-if (item < 1 || item > 15) {
+if (item < 1 || item > 45) {
 	key = false;
 	%>
 	<script>
