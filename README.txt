@@ -2,53 +2,25 @@
 팀 5
 김요엘, 이현민
 
-PRIMARY KEY는 제외함.
-
 ORDER1 :
-Oquantity	int unsigned not null,
-Cno		int unsigned not null,
-Ino		int unsigned not null,
-Rno		int unsigned not null,
-Odate		datetime,
-FOREIGN KEY(Cno) REFERENCES CUSTOMER (Cnumber),
-FOREIGN KEY(Rno, Ino) REFERENCES STOCK (Rnum, Inum)
+Oquantity = 주문 수량에 대해서 Secondary indexing
 
 SHOPPINGBAG :
-Bquantity	int 	unsigned
+Bquantity = 수량에 대해서 인덱스
 
 PRODUCERLOCATION :
-Origin		varchar(20)	,
-Importer 	varchar(20)	,
-Producer	varchar(20)	,
-FOREIGN KEY(Inum) REFERENCES ITEM (Inumber)
+Importer = 널값이 많은 수입자를 인덱스
 
 STOCK :
-Squantity	int unsigned
-FOREIGN KEY(Rnum) REFERENCES RETAILER (Rnumber),
-FOREIGN KEY(Inum) REFERENCES ITEM (Inumber)
+Squantity = 재고량에 대해서 인덱스
 
 ITEM :
-Date_of_product DATE 		NOT NULL,
-Price 		int	 	unsigned NOT NULL,
-Iname 		varchar(30) 	NOT NULL,
-Expiration_date DATE 		NOT NULL,
-Smallc 		varchar(25) 	NOT NULL,
-FOREIGN KEY(Smallc) REFERENCES CATEGORY (Small_category)
+Price = 가격에 대해서 인덱싱
 
-CATEGORY :
-Large_category	varchar(25) 	NOT NULL,
-PRIMARY KEY(Small_category)
+CATEGORY : 수가 너무 적어서 인덱싱 안함
 
 RETAILER :
-Address varchar(50) NOT NULL,
-PRIMARY KEY(Rnumber)
+Address = 매장 주소에 대해서 인덱싱
 
 CUSTOMER :
-Cname	varchar(20) 	NOT NULL,
-Address	varchar(50) 	NOT NULL,
-Job	varchar(30)		, 
-Age	int		unsigned,
-Sex	char			,
-Phone	varchar(15) 	NOT NULL,
-Grade	char	    	NOT NULL,
-Pwd	varchar(15) 	NOT NULL,
+Age = 나이에 대해서 인덱싱
