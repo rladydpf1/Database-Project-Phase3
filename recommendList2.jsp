@@ -12,7 +12,7 @@
 <h3>성별 정보를 입력하지 않으셨군요?</h3><br>
 <%
 String user = "root";
-String password = "brandon0504";
+String password = "rladydpf2";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
 Statement stmt = null;
 PreparedStatement pstmt = null;
@@ -45,7 +45,7 @@ sql = String.format("SELECT Iname, Price, Smallc " +
 		"GROUP BY Inumber " +
 		"ORDER BY COUNT(Inumber) DESC LIMIT 5");
 pstmt = conn.prepareStatement(sql);
-pstmt.executeUpdate();
+rs = pstmt.executeQuery();
 
 %>
 <table width="700" cellpadding="5" border ="1">
@@ -72,5 +72,8 @@ while (rs.next()) {
 <%
 }
 %>
+</table>
+<br>
+<input type = "button" value = "진짜 로그인 하러 가기" onclick = "location.href = 'login.jsp'">
 </body>
 </html>
