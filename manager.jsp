@@ -24,7 +24,7 @@ if (manager == null) {
 <form action = "updateStock.jsp" method="post">
 	아이템 고유 번호 입력: <input type = "number" name = "id"><br>
 	매장 번호 입력: <input type = "number" name = "retail"><br>
-	수량 입력: <input type = "number" name = "passwd"><br>
+	수량 입력: <input type = "number" name = "quantity"><br>
 	<input type = "submit" value = "해당 상품 주문">
 </form>
 <br>
