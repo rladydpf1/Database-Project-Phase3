@@ -1,7 +1,5 @@
 마지막 남은거 :
 
-order.jsp (동시성 제어)
-
 updateInfo.jsp (데이터베이스에 주소 저장)
 
 joinSession.jsp (데이터베이스에 주소 저장)
@@ -10,8 +8,6 @@ index 생성 (README.txt)
 
 신규 고객 추천 상품 서비스
 
-사용자 매뉴얼
-
 추가과제 2.txt
 
-추가과제 3.txt
+추가과제 3.txt (동시성 제어 거의 실패?)
