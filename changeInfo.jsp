@@ -24,7 +24,7 @@ catch (Exception e) {
 }
 System.out.println(customer);
 String user = "root";
-String password = "rladydpf2";
+String password = "brandon0504";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
 Statement stmt = null;
 PreparedStatement pstmt = null;
@@ -131,6 +131,7 @@ while (rs.next()) {
 	    </tr>
 	</table>
 	성별: <select name = "sex" >
+			<option selected>-선택-</option>
 			<option value="M">남자</option>
 			<option value="F">여자</option>
 			</select> <br>

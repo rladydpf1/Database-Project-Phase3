@@ -45,6 +45,7 @@
 	휴대전화(- 포함해서 입력): <input type = "text" name = "phone"><br>
 	<h3> 아래는 선택 입력사항 입니다.</h3> <br>
 	성별: <select name = "sex" >
+			<option selected>-선택-</option>
 			<option value="M">남자</option>
 			<option value="F">여자</option>
 			</select> <br>
