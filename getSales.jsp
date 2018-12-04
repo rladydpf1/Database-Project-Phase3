@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>get sales</title>
 </head>
 <body>
@@ -91,7 +91,7 @@ catch (Exception e) {
 System.out.println(start);
 System.out.println(finish);
 sql = String.format("CREATE OR REPLACE VIEW D_sales AS " +
-					"SELECT Sum(Oquantity) as SO, Ino FROM Order1 WHERE DATE(Odate) BETWEEN '%s' AND '%s' GROUP BY Ino", start, finish);
+					"SELECT Sum(Oquantity) as SO, Ino FROM ORDER1 WHERE DATE(Odate) BETWEEN '%s' AND '%s' GROUP BY Ino", start, finish);
 pstmt = conn.prepareStatement(sql);
 pstmt.executeUpdate();
 sql = String.format("SELECT SUM(Price * So) FROM D_sales Join ITEM On Ino = Inumber");
