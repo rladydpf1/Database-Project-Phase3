@@ -11,7 +11,7 @@
 <%
 int number = -1;
 String user = "root";
-String password = "brandon0504";
+String password = "rladydpf2";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
 Statement stmt = null;
 PreparedStatement pstmt = null;
@@ -38,10 +38,11 @@ if (!temp.isEmpty()){
 	age = Integer.parseInt(temp);
 	key2 = false;
 }
-String name = request.getParameter("name");
+String sex = "0";
+String name = new String(request.getParameter("name").getBytes("8859_1"), "EUC-KR");
 String address = request.getParameter("big");
 String job = request.getParameter("job");
-String sex = request.getParameter("sex");
+sex = request.getParameter("sex");
 String phone = request.getParameter("phone");
 String pwd = request.getParameter("passwd");
 String dup_id = null;
@@ -126,53 +127,41 @@ if (key) {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.executeUpdate();
 	}
-	if (job == null) sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", number); {
-		sql = String.format("UPDATE CUSTOMER SET Address = '%s' WHERE Cnumber = %d", address, number); // 주소는 나중으로 미루자..
-		pstmt = conn.prepareStatement(sql);
-		pstmt.executeUpdate();
-	}
+}
+System.out.println(age);
+System.out.println(sex);
+if (age > 0 && !sex.equals("0")) {
+	%>
+	<form action = "recommendList4.jsp" method="post">
+	<input type = "hidden" name = "sex" value =<%=sex%>>
+	<input type = "hidden" name = "age" value =<%=age%>>
+	<input type = "submit" value = "로그인 하러가기">
+	</form>
+	<%
+}
+else if (age > 0 && sex.equals("0")) {
+	%>
+	<form action = "recommendList2.jsp" method="post">
+	<input type = "hidden" name = "age" value =<%=age%>>
+	<input type = "submit" value = "로그인 하러가기">
+	</form>
+	<%
+}
+else if (age <= 0 && !sex.equals("0")) {
+	%>
+	<form action = "recommendList3.jsp" method="post">
+	<input type = "hidden" name = "sex" value =<%=sex%>>
+	<input type = "submit" value = "로그인 하러가기">
+	</form>
+	<%
+}
+else {
+	%>
+	<form action = "recommendList1.jsp" method="post">
+	<input type = "submit" value = "로그인 하러가기">
+	</form>
+	<%
 }
 %> 
-<script type = "text/javascript">
-<!--
-	alert('회원가입을 완료했습니다.');
-	var sex = '<%= sex %>';
-	var age = '<%= age %>';
-	if(sexv == "0" || agev < 1){
-		popupOpen1();
-	}
-	else if(sexv != "0"|| agev < 1){
-		popupOpen2();
-	}
-	else if(sexv == "0" || agev > 0){
-		popupOpen3();
-	}
-	else if(sexv != "0" || agev > 0){
-		popupOpen4();
-	}
-	
-	function popupOpen1(){
-		var popUrl = "recommendList1.jsp"
-		var popOption = "width = 1600, height = 1200, resizable = no, scrollbars = yes, status = no";
-		var popup = window.open(popUrl,"★★ 새 회원 추천 상품 ★★_no sex age",popOption);
-	}
-	function popupOpen2(){
-		var popUrl = "recommendList2.jsp?age=" + age;
-		var popOption = "width = 1600, height = 1200, resizable = no, scrollbars = yes, status = no";
-		var popup = window.open(popUrl,"★★ 새 회원 추천 상품 ★★_no sex",popOption);
-	}
-	function popupOpen3(){
-		var popUrl = "recommendList3.jsp?sex=" + sex;
-		var popOption = "width = 1600, height = 1200, resizable = no, scrollbars = yes, status = no";
-		var popup = window.open(popUrl,"★★ 새 회원 추천 상품 ★★_no age",popOption);
-	}
-	function popupOpen4(){
-		var popUrl = "recommendList4.jsp?sex=" + sex + "&age=" + age;
-		var popOption = "width = 1600, height = 1200, resizable = no, scrollbars = yes, status = no";
-		var popup = window.open(popUrl,"★★ 새 회원 추천 상품 ★★",popOption);
-	}
-	location.href = 'login.jsp'
--->
-</script>
 </body>
 </html>
