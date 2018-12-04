@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language="java" import = "java.text.*, java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>search result</title>
 </head>
 <body>
@@ -29,7 +29,6 @@ PreparedStatement pstmt = null;
 ResultSet rs = null;
 Connection conn = null;
 String sql = null;
-
 try {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection(url, user, password);
@@ -38,7 +37,6 @@ try {
 catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
-
 String keyword = null;
 try {
 	keyword = new String(request.getParameter("name").getBytes("8859_1"), "EUC-KR");
@@ -55,7 +53,6 @@ sql = String.format("SELECT Inumber, Iname, Price, Smallc FROM ITEM WHERE Iname 
 System.out.println(sql);
 pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();
-
 int number = 0, price = 0;
 String name = null, cate = null;
 %>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language="java" import = "java.text.*, java.sql.*, java.util.Date, java.util.Calendar, java.text.SimpleDateFormat" %>
 <%!
 	public boolean checkValid(int year, int month, int day) {
@@ -42,7 +42,6 @@ PreparedStatement pstmt = null;
 ResultSet rs = null;
 Connection conn = null;
 String sql = null;
-
 try {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection(url, user, password);
@@ -51,11 +50,9 @@ try {
 catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
-
 String start = null, finish = null;
 start = request.getParameter("start");
 finish = request.getParameter("finish");
-
 if (start.isEmpty()) start = "2016-10-01";
 if (finish.isEmpty()) finish = "2018-12-31";
 SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
@@ -93,12 +90,10 @@ catch (Exception e) {
 }
 System.out.println(start);
 System.out.println(finish);
-
 sql = String.format("CREATE OR REPLACE VIEW D_sales AS " +
 					"SELECT Sum(Oquantity) as SO, Ino FROM Order1 WHERE DATE(Odate) BETWEEN '%s' AND '%s' GROUP BY Ino", start, finish);
 pstmt = conn.prepareStatement(sql);
 pstmt.executeUpdate();
-
 sql = String.format("SELECT SUM(Price * So) FROM D_sales Join ITEM On Ino = Inumber");
 pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();

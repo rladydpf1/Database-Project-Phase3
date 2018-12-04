@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language="java" import = "java.text.*, java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>shopping bag</title>
 </head>
 <body>
@@ -30,7 +30,6 @@ PreparedStatement pstmt = null;
 ResultSet rs = null;
 Connection conn = null;
 String sql = null;
-
 try {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection(url, user, password);
@@ -42,7 +41,6 @@ catch (ClassNotFoundException e) {
 sql = String.format("SELECT Iname, Price, Bquantity, Inum FROM CUSTOMER, ITEM, SHOPPINGBAG WHERE Cnumber = %d AND Cnumber = Cnum AND Inumber = Inum", customer);
 pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();
-
 %>
 <table width="400" cellpadding="5" border ="1">
 		<tread>

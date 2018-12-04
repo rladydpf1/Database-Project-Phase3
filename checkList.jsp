@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language="java" import = "java.text.*, java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>check the list</title>
 </head>
 <body>
@@ -27,7 +27,6 @@ PreparedStatement pstmt = null;
 ResultSet rs = null;
 Connection conn = null;
 String sql = null;
-
 try {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection(url, user, password);
@@ -40,7 +39,6 @@ sql = String.format("CREATE OR REPLACE VIEW V_stock AS " +
 					"SELECT Inum, SUM(Squantity) AS SSQ FROM STOCK GROUP BY Inum");
 pstmt = conn.prepareStatement(sql);
 pstmt.executeUpdate();
-
 sql = String.format("SELECT Inum, Iname, Price, SSQ FROM ITEM, V_stock WHERE Inum = Inumber AND SSQ <= 20");
 pstmt = conn.prepareStatement(sql);
 rs = pstmt.executeQuery();

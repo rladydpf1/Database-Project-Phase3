@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language="java" import = "java.text.*, java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>update information</title>
 </head>
 <body>
@@ -29,7 +29,6 @@ PreparedStatement pstmt = null;
 ResultSet rs = null;
 Connection conn = null;
 String sql = null;
-
 try {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection(url, user, password);
@@ -52,7 +51,6 @@ String sex = request.getParameter("sex");
 String phone = request.getParameter("phone");
 String pwd = request.getParameter("passwd");
 boolean key = true;
-
 if (pwd.isEmpty() || 5 > pwd.length() || pwd.length() > 10) {
 	%>
 	<script>
@@ -95,29 +93,23 @@ if (key) {
 	else sql = String.format("UPDATE CUSTOMER SET Age = %s WHERE Cnumber = %d", age, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
-
 	sql = String.format("UPDATE CUSTOMER SET Cname = '%s' WHERE Cnumber = %d", name, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
-
 	if (job.isEmpty()) sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", customer);
 	else sql = String.format("UPDATE CUSTOMER SET Job = '%s' WHERE Cnumber = %d", job, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
-
 	sql = String.format("UPDATE CUSTOMER SET Pwd = '%s' WHERE Cnumber = %d", pwd, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
-
 	if (sex.isEmpty()) sql = String.format("UPDATE CUSTOMER SET Sex = null WHERE Cnumber = %d", customer);
 	else sql = String.format("UPDATE CUSTOMER SET Sex = '%s' WHERE Cnumber = %d", sex, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
-
 	sql = String.format("UPDATE CUSTOMER SET Phone = '%s' WHERE Cnumber = %d", phone, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
-
 	//if (job == "") sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", number);
 	//sql = String.format("UPDATE CUSTOMER SET Address = '%s' WHERE Cnumber = %d", address, number); // 주소는 나중으로 미루자..
 	//pstmt = conn.prepareStatement(sql);
@@ -130,4 +122,3 @@ if (key) {
 </script>
 </body>
 </html>
-

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language="java" import = "java.text.*, java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>메인 페이지</title>
 </head>
 <body>
@@ -62,7 +62,6 @@ catch (Exception e) {
 	sql = String.format("SELECT Iname, Price, Smallc, Inumber FROM ITEM WHERE Smallc = '%s'", cate[small_num]);
 	pstmt = conn.prepareStatement(sql);
 	rs = pstmt.executeQuery();
-
 	%>
 	<table width="700" cellpadding="5" border ="1">
 			<tread>

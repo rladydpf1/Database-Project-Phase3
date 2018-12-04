@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language="java" import = "java.text.*, java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>update stock</title>
 </head>
 <body>
@@ -27,7 +27,6 @@ PreparedStatement pstmt = null;
 ResultSet rs = null;
 Connection conn = null;
 String sql = null;
-
 try {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection(url, user, password);
@@ -36,7 +35,6 @@ try {
 catch (ClassNotFoundException e) {
 	e.printStackTrace();
 }
-
 String temp = null;
 boolean key = true;
 int item = 0, retail = 0, quantity = -1;
@@ -85,7 +83,6 @@ if (key){
 	while (rs.next()) {
 		overlap = rs.getInt(1);
 	}
-
 	sql = String.format("UPDATE STOCK SET Squantity = %d WHERE Rnum = %d AND Inum = %d", quantity + overlap, retail, item);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
