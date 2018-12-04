@@ -44,8 +44,20 @@ if (!temp.isEmpty()) {
 	age = Integer.parseInt(temp);
 	key2 = false;
 }
-String name = request.getParameter("name");
-//String address = request.getParameter("big"); 이건 나중에 처리합시다
+String name = new String(request.getParameter("name").getBytes("8859_1"), "UTF-8");
+String address = null;
+try {
+	address = new String(request.getParameter("address").getBytes("8859_1"), "UTF-8");
+	System.out.println(address);
+}
+catch (Exception E) {
+	%>
+	<script>
+	alert('제대로 주소를 적어주세요.')
+	location.href = 'joinMembership.jsp'
+	</script>
+	<%
+}
 String job = request.getParameter("job");
 String sex = request.getParameter("sex");
 String phone = request.getParameter("phone");
@@ -88,6 +100,15 @@ if (age < 1 && !key2) {
 	<%
 	key = false;
 }
+if (address.isEmpty()) {
+	%>
+	<script>
+	alert('주소를 적으십시오.')
+	location.href = 'joinMembership.jsp'
+	</script>
+	<%
+	key = false;
+}
 if (key) {
 	if (age < 1) sql = String.format("UPDATE CUSTOMER SET Age = null WHERE Cnumber = %d", customer);
 	else sql = String.format("UPDATE CUSTOMER SET Age = %s WHERE Cnumber = %d", age, customer);
@@ -103,17 +124,16 @@ if (key) {
 	sql = String.format("UPDATE CUSTOMER SET Pwd = '%s' WHERE Cnumber = %d", pwd, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
-	if (sex.isEmpty()) sql = String.format("UPDATE CUSTOMER SET Sex = null WHERE Cnumber = %d", customer);
+	if (sex.equals("0")) sql = String.format("UPDATE CUSTOMER SET Sex = null WHERE Cnumber = %d", customer);
 	else sql = String.format("UPDATE CUSTOMER SET Sex = '%s' WHERE Cnumber = %d", sex, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 	sql = String.format("UPDATE CUSTOMER SET Phone = '%s' WHERE Cnumber = %d", phone, customer);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
-	//if (job == "") sql = String.format("UPDATE CUSTOMER SET Job = null WHERE Cnumber = %d", number);
-	//sql = String.format("UPDATE CUSTOMER SET Address = '%s' WHERE Cnumber = %d", address, number); // 주소는 나중으로 미루자..
-	//pstmt = conn.prepareStatement(sql);
-	//pstmt.executeUpdate();
+	sql = String.format("UPDATE CUSTOMER SET Address = '%s' WHERE Cnumber = %d", address, customer); // 주소는 나중으로 미루자..
+	pstmt = conn.prepareStatement(sql);
+	pstmt.executeUpdate();
 }
 %> 
 <script>

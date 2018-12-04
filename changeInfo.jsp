@@ -24,7 +24,7 @@ catch (Exception e) {
 }
 System.out.println(customer);
 String user = "root";
-String password = "brandon0504";
+String password = "rladydpf2";
 String url = "jdbc:mysql://localhost:3306/Shopping_mall?autoReconnect=true& useUnicode=true& characterEncoding=utf8 &useSSL=false&serverTimezone=Asia/Seoul";
 Statement stmt = null;
 PreparedStatement pstmt = null;
@@ -87,8 +87,8 @@ while (rs.next()) {
 	        <td id="title"><%=address %></td>
 	    </tr>
 	</table>
-	
-	주소: <select name = "c1" onChange = "c1Change(this.value,c2)">
+	주소: <input type = "text" name = "address"><br>
+<!--	주소: <select name = "c1" onChange = "c1Change(this.value,c2)">
 			<option selected>-선택-</option>
 			<option value="1">서울</option>
 			<option value="2">경기</option>
@@ -113,7 +113,7 @@ while (rs.next()) {
 			</select>
 		<select name = "c3">
 			<option selected>-선택-</option>
-			</select>
+			</select> -->
 			<br>
 	
 	<table>
@@ -131,7 +131,7 @@ while (rs.next()) {
 	    </tr>
 	</table>
 	성별: <select name = "sex" >
-			<option selected>-선택-</option>
+			<option value="0" selected>-선택-</option>
 			<option value="M">남자</option>
 			<option value="F">여자</option>
 			</select> <br>

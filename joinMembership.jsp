@@ -15,7 +15,8 @@
 	아이디(5~10자): <input type = "text" name = "id"><br>
 	패스워드(5~10자): <input type = "password" name = "passwd"><br>
 	이름: <input type = "text" name = "name"><br>
-	주소: <select name = "c1" onChange = "c1Change(this.value,c2)">
+	주소: <input type = "text" name = "address"><br>
+<!--	주소: <select name = "c1" onChange = "c1Change(this.value,c2)">
 			<option selected>-선택-</option>
 			<option value="1">서울</option>
 			<option value="2">경기</option>
@@ -38,9 +39,13 @@
 		<select name = "c2" onChange = "c2Change(this.value,c3)">
 			<option selected>-선택-</option>
 			</select>
-		<select name = "c3">
+		<select name = "c3" onChange = "c3Change(this.value, c1, c2)">
 			<option selected>-선택-</option>
 			</select>
+			
+			<input type = "hidden" name = "c1name" value="c1name">
+			<input type = "hidden" name = "c2name" value="c2name">
+			<input type = "hidden" name = "c3name" value="c3name%">-->
 			<br>
 	휴대전화(- 포함해서 입력): <input type = "text" name = "phone"><br>
 	<h3> 아래는 선택 입력사항 입니다.</h3> <br>
@@ -53,7 +58,7 @@
 	직업: <input type = "text" name = "job"> <br>
 	<input type = "submit" value = "회원정보 등록">
 	</form>
-<script type = "text/javascript">
+
 <!--
 var c1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
 var c1_name = new Array('서울','경기','강원','충남','충북','경북','경남','전북','전남','제주','인천','대전','광주','대구','울산','부산','세종');
@@ -222,6 +227,5 @@ for(i=0; i<name.length; i++){
 }
 }
 -->
-</script>
 </body>
 </html>

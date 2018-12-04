@@ -39,7 +39,7 @@ catch (ClassNotFoundException e) {
 }
 String keyword = null;
 try {
-	keyword = new String(request.getParameter("name").getBytes("8859_1"), "EUC-KR");
+	keyword = new String(request.getParameter("name").getBytes("8859_1"), "UTF-8");
 }
 catch (Exception E) {
 	%>
@@ -84,5 +84,6 @@ String name = null, cate = null;
 	<%
 }
 	%>
+</table>
 </body>
 </html>

@@ -39,8 +39,21 @@ if (!temp.isEmpty()){
 	key2 = false;
 }
 String sex = "0";
-String name = new String(request.getParameter("name").getBytes("8859_1"), "EUC-KR");
-String address = request.getParameter("big");
+String name = new String(request.getParameter("name").getBytes("8859_1"), "UTF-8");
+String address = null;
+try {
+	address = new String(request.getParameter("address").getBytes("8859_1"), "UTF-8");
+	System.out.println(address);
+}
+catch (Exception E) {
+	%>
+	<script>
+	alert('제대로 주소를 적어주세요.')
+	location.href = 'joinMembership.jsp'
+	</script>
+	<%
+}
+//String address = request.getParameter("big");
 String job = request.getParameter("job");
 sex = request.getParameter("sex");
 String phone = request.getParameter("phone");
@@ -107,9 +120,17 @@ if (age < 1 && !key2) {
 	<%
 	key = false;
 }
-
+if (address.isEmpty()) {
+	%>
+	<script>
+	alert('주소를 적으십시오.')
+	location.href = 'joinMembership.jsp'
+	</script>
+	<%
+	key = false;
+}
 if (key) {
-	sql = String.format("INSERT INTO CUSTOMER VALUES('%s', 'no address', null, null, %d, null, '%s', 'E', '%s', '%s')", name, number, phone, id, pwd);
+	sql = String.format("INSERT INTO CUSTOMER VALUES('%s', '%s', null, null, %d, null, '%s', 'E', '%s', '%s')", name, address, number, phone, id, pwd);
 	pstmt = conn.prepareStatement(sql);
 	pstmt.executeUpdate();
 	if (age > 0) {
@@ -128,8 +149,11 @@ if (key) {
 		pstmt.executeUpdate();
 	}
 }
-System.out.println(age);
-System.out.println(sex);
+	%>
+	<script>
+	alert('★★회원가입을 완료했습니다★★')
+	</script>
+	<%
 if (age > 0 && !sex.equals("0")) {
 	%>
 	<form action = "recommendList4.jsp" method="post">
